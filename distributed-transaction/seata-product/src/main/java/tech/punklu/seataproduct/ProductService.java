@@ -1,17 +1,20 @@
 package tech.punklu.seataproduct;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProductService {
 
     @Autowired
     private ProductDao productDao;
 
     public void deduct(Long productId,Integer count){
+        log.info("开始扣库存，productId={},count={}",productId,count);
         Optional<ProductEntity> byId = productDao.findById(productId);
         if (byId.isPresent()){
             ProductEntity entity = byId.get();
